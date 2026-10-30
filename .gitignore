@@ -1,0 +1,6 @@
+node_modules
+dist
+.env
+backend/servers.json
+backend/lunax
+backend/*.exe

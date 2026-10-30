@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: lunax
+      POSTGRES_PASSWORD: lunax
+      POSTGRES_DB: lunax
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "lunax"]
+      interval: 3s
+      retries: 20
+
+  lunax:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      LUNAX_DATABASE_URL: postgres://lunax:lunax@db:5432/lunax?sslmode=disable
+      LUNAX_SECRET_KEY: ${LUNAX_SECRET_KEY:?set LUNAX_SECRET_KEY in .env}
+      LUNAX_ADMIN_TOKEN: ${LUNAX_ADMIN_TOKEN:-}
+      LUNAX_AUTO_APPROVE: ${LUNAX_AUTO_APPROVE:-false}
+      LUNAX_WELCOME_BONUS: ${LUNAX_WELCOME_BONUS:-0}
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

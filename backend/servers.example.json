@@ -1,0 +1,11 @@
+[
+  {
+    "slug": "myserver",
+    "name": "Моя приватка",
+    "kind": "gramsrv",
+    "api_url": "http://127.0.0.1:2402",
+    "secret": "${MYSERVER_ADMIN_TOKEN}",
+    "contact": "@admin",
+    "stars_per_gram": 10
+  }
+]

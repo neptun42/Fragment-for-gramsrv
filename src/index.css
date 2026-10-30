@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-brand: "Unbounded", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #1a2026;
+  --color-surface: #222c37;
+  --color-elevated: #2a3643;
+  --color-hover: #313e4c;
+  --color-line: rgb(255 255 255 / 0.07);
+  --color-line-strong: rgb(255 255 255 / 0.12);
+  --color-fg: #ffffff;
+  --color-muted: #8f9dac;
+  --color-subtle: #66737f;
+
+  --color-accent: #2e9bff;
+  --color-accent-hover: #4dabff;
+  --color-link: #45adff;
+  --color-success: #4bd18b;
+  --color-danger: #ff5c63;
+
+  --color-r-common: #9aa8b6;
+  --color-r-rare: #3ea4ff;
+  --color-r-epic: #a77bff;
+  --color-r-legendary: #ffbe4d;
+
+  --radius-glass: 22px;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01", "ss03";
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 45%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.12) transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+/* подложки */
+
+/* полупрозрачная панель с блюром */
+@utility glass {
+  background: rgb(36 46 58 / 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgb(255 255 255 / 0.07);
+  box-shadow: 0 12px 32px -12px rgb(0 0 0 / 0.45);
+}
+
+@utility glass-thin {
+  background: rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@utility card {
+  background: var(--color-surface);
+  border: 1px solid rgb(255 255 255 / 0.05);
+}
+
+@utility btn-primary {
+  background: var(--color-accent);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility fade-x {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.04) 25%, rgb(255 255 255 / 0.08) 50%, rgb(255 255 255 / 0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
